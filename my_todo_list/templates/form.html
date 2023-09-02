@@ -1,0 +1,7 @@
+{% block form %}
+  <form method="POST" action="/">
+    {{ form.csrf_token }} {{ form.content.label }} {{ form.content(size=20) }}
+    {{ form.completed.label }} {{ form.completed() }} {{ form.submit() }}
+    <input type="submit" value="Go" />
+  </form>
+{% endblock %}

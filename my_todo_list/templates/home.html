@@ -1,0 +1,28 @@
+{% extends "base.html" %} {% block content %}
+<h1 class='text-center'>TODO APP</h1>
+
+<div class="container d-flex flex-column gap-4">
+    <h2>Add your todos<h2/>
+    <form method="POST" action="/" class="d-flex flex-column mb-8">
+        {{ form.csrf_token }} 
+        {{ form.content.label }} 
+        {{ form.content(size=20 , class="form-control mb-3 mt-3") }}
+        {{ form.completed.label }}
+         {{ form.completed(class="form-check-input mb-3 mt-3 cursor-pointer", role="button") }} 
+         {{ form.submit(class="btn btn-primary", ) }}
+    </form>
+    <br>
+    <section class="mt-6 d-flex justify-space-between gap-3 flex-wrap">
+        {% for todo in todos %}
+        <div class="card" style="width: 18rem;">
+            <div class="card-body d-flex flex-column justify-center align-center"  id={{ todo.id }}>
+                <p class="card-text">Description: {{ todo.content }}</p>
+                <p class="card-text">Completed: {{ "completed" if todo.completed else "Not completed" }}</p>
+                <a href="/delete/{{ todo.id }}"> <button class="btn btn-danger">Delete</button></a>
+            </div>
+        </div>
+        {% endfor %}
+    </section>
+</div>
+</div>
+{% endblock %}
